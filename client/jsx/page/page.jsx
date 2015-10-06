@@ -55,10 +55,12 @@ var Page = React.createClass({
   },
   addKeywordArg: function(e) {
     var _state = this.state;
-    var key = $("#key").val();
-    var value = $("#value").val();
+    var key = $("#key").val().trim();
+    var value = $("#value").val().trim();
     if (key && value) {
-      _state["keyargs"][key.trim()] = value.trim();
+      var val = parseFloat(value);
+      value = isNaN(val) ? value : val;
+      _state["keyargs"][key] = value;
       $("#key").val("");
       $("#value").val("");
       $("#key").focus();
@@ -118,7 +120,6 @@ var Page = React.createClass({
 
     return (
       <div className="page">
-        <a target="_blank" href="https://indico.io/register">Need an API key?</a>
         <h1>{this.props.api.title}</h1>
         <a target="_blank" href={
             this.props.api.type === "text"
@@ -151,6 +152,7 @@ var Page = React.createClass({
         </h5>
         <textarea id="results" readOnly rows="1" wrap="soft"></textarea>
         <div className="footer">
+            <div><a target="_blank" href="https://indico.io/register">Need an API key?</a></div>
             <input id="apikey" placeholder="Enter Your API Key" type="text" defaultValue={Cookie.getCookie("apikey")}></input>
             <input id="cloud" placeholder="Cloud (optional)" type="text"></input>
           <button className="submit" id="submit" onClick={this.callAPI}>Run</button>
