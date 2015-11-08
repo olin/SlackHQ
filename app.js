@@ -14,7 +14,7 @@ var server = app.listen(PORT, "0.0.0.0", function () {
     var address = server.address();
 
     console.log(
-      "IndiKit is listening at http://%s:%s",
+      "SlacHQ is listening at http://%s:%s",
       address.host || "localhost",
       address.port
     );
