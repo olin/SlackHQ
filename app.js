@@ -4,11 +4,6 @@ var express = require("express");
 // Creating Express Server
 var app = express();
 
-// Add Static Resources
-var path = require("path");
-app.use(express.static(path.join(__dirname, "public")))
-app.use('/bower_components', express.static(path.join(__dirname, 'bower_components')));
-
 // Add Middleware and Routing
 require("./server/middleware")(app);
 require("./server/routes")(app);
